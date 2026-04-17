@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тестирование МЦКО</title>
+<link rel="stylesheet" href="style.css">
+<!-- KaTeX для LaTeX-формул -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+</head>
+<body>
+<div class="container">
+    <div style="text-align:center;margin-bottom:20px">
+        <div class="logo-circle">М</div>
+    </div>
+    <div class="header">
+        <h1>ГБОУ Школа №1363</h1>
+        <p>Вариант 1</p>
+    </div>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <div class="reg-form" id="regForm">
+        <h2 class="form-title">Регистрация</h2>
+        <div class="fg">
+            <label>Фамилия <span class="req">*</span></label>
+            <input type="text" id="lastName" placeholder="Введите фамилию">
+            <div class="err" id="errLast">Введите фамилию</div>
+        </div>
+        <div class="fg">
+            <label>Имя <span class="req">*</span></label>
+            <input type="text" id="firstName" placeholder="Введите имя">
+            <div class="err" id="errFirst">Введите имя</div>
+        </div>
+        <div class="fg">
+            <label>Класс <span class="req">*</span></label>
+            <select id="grade">
+                <option value="">Выберите класс</option>
+                <option>5</option><option>6</option><option>7</option>
+                <option>8</option><option>9</option><option>10</option><option>11</option>
+            </select>
+            <div class="err" id="errGrade">Выберите класс</div>
+        </div>
+        <button class="btn-start" id="startBtn">Начать тестирование</button>
+    </div>
+
+    <!-- ТЕСТ -->
+    <div class="test-wrap" id="testWrap">
+        <div class="info-bar">
+            <div><strong>Участник:</strong> <span id="pName"></span></div>
+            <div><strong>Класс:</strong> <span id="pGrade"></span></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="pFill" style="width:10%"></div>
+        </div>
+        <div class="meta-bar">
+            <div><strong>Предмет:</strong> Математика</div>
+            <div><strong>Задание:</strong> <span id="qNum">1</span> из 10</div>
+            <div><strong>Время:</strong> <span id="timer">45:00</span></div>
+        </div>
+
+        <!-- ВОПРОС 1 -->
+        <div class="qblock show" id="q1">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext">
+                Найдите значение выражения&nbsp;
+                <span class="fr"><span class="n">2</span><span class="d">3</span></span>
+                &nbsp;+&nbsp;
+                <span class="fr"><span class="n">7</span><span class="d">9</span></span>
+                &nbsp;:&nbsp;
+                <span class="fr"><span class="n">14</span><span class="d">5</span></span>&nbsp;.
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a1a"></div>
+            <div class="or-div">или</div>
+            <div class="qtext">
+                Найдите значение выражения&nbsp;
+                <span class="fr"><span class="n">0,6 + 0,52</span><span class="d">2,8</span></span>&nbsp;.
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a1b"></div>
+            <div class="save-row">
+                <button class="save-btn" id="sv1">Сохранить ответы</button>
+                <span class="saved-ok" id="saved1">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 2 -->
+        <div class="qblock" id="q2">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext">
+                Вычислите:&nbsp;
+                <span class="fr"><span class="n">15<sup>6</sup></span><span class="d">9<sup>3</sup> · 25<sup>2</sup></span></span>&nbsp;.
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a2"></div>
+            <div class="save-row">
+                <button class="save-btn" id="sv2">Сохранить ответы</button>
+                <span class="saved-ok" id="saved2">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 3 — LaTeX -->
+        <div class="qblock" id="q3">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext-latex">
+                Найдите корень уравнения:
+                $$4(2x - 3) = -2x + 8$$
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a3"></div>
+            <div class="save-row">
+                <button class="save-btn" id="sv3">Сохранить ответы</button>
+                <span class="saved-ok" id="saved3">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 4 — Числовая прямая -->
+        <div class="qblock" id="q4">
+            <div class="qtext" style="font-family:'Times New Roman',serif;font-size:18px;font-weight:bold;margin-bottom:16px;">
+                Отметьте на числовой прямой точку&nbsp;<i>A</i>&thinsp;
+                <span style="font-size:22px">(</span>−0,75<span class="fr">)</span>.
+            </div>
+            <div class="nl-hint-italic">
+                <i>Переместите с помощью компьютерной мыши табличку с надписью «A» на числовую прямую.</i>
+            </div>
+            <div class="nl-wrapper" id="nlWrapper">
+                <canvas id="nlCanvas"></canvas>
+            </div>
+            <div class="save-row">
+                <button class="save-btn" id="sv4">Сохранить ответы</button>
+                <span class="saved-ok" id="saved4">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 5 (5.1) -->
+        <div class="qblock" id="q5">
+            <div class="instr-box">Ответ на задание запишите в виде целого числа.</div>
+            <div class="instr-box2">Прочитайте текст и выполните задание 5.1.</div>
+            <div class="qtext-block">
+                Из пункта А в направлении пункта Б, расстояние между которыми равно 240&nbsp;км,
+                в 7&nbsp;часов утра выехал велосипедист, а через некоторое время из пункта&nbsp;А
+                в том же направлении выехал автомобиль. Доехав до пункта&nbsp;Б, автомобиль сделал
+                остановку на 3&nbsp;часа, а затем с той же скоростью поехал обратно.
+            </div>
+            <div class="qtext-block">
+                На рисунке график движения велосипедиста обозначен цифрой&nbsp;<b>1</b>,
+                график движения автомобиля — цифрой&nbsp;<b>2</b> (приведён не полностью).
+            </div>
+            <div class="graph-wrapper">
+                <canvas id="graphCanvas" width="780" height="440"></canvas>
+            </div>
+            <div class="qtext-block" style="margin-top:12px">
+                <b>Задание 5.1.</b> Найдите, на каком расстоянии от пункта&nbsp;А автомобиль догнал велосипедиста.
+                Ответ дайте в километрах.
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a5">&nbsp;км</div>
+            <div class="save-row">
+                <button class="save-btn" id="sv5">Сохранить ответы</button>
+                <span class="saved-ok" id="saved5">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 6 (5.2) — Достроить график -->
+        <div class="qblock" id="q6">
+            <div class="instr-box2">Прочитайте текст и выполните задание 5.2.</div>
+            <div class="qtext-block">
+                Из пункта А в направлении пункта Б, расстояние между которыми равно 240&nbsp;км,
+                в 7&nbsp;часов утра выехал велосипедист, а через некоторое время из пункта&nbsp;А
+                в том же направлении выехал автомобиль. Доехав до пункта&nbsp;Б, автомобиль сделал
+                остановку на 3&nbsp;часа, а затем с той же скоростью поехал обратно.
+            </div>
+            <div class="qtext-block">
+                <b>Задание 5.2.</b> На рисунке достройте график движения автомобиля до момента возвращения в пункт&nbsp;А.
+            </div>
+            <div class="qtext-block" style="color:#b8860b;font-style:italic;">
+                Щёлкайте левой кнопкой мыши по точкам координатной плоскости.
+                Точки привязываются к сетке автоматически.
+            </div>
+            <div class="graph-wrapper">
+                <canvas id="graphCanvas2" width="780" height="440"></canvas>
+            </div>
+            <div style="margin-top:8px;display:flex;gap:12px;flex-wrap:wrap">
+                <button class="save-btn" id="undoGraph2">↩ Отменить последнюю точку</button>
+                <button class="save-btn" id="clearGraph2">✕ Очистить построение</button>
+            </div>
+            <div class="save-row">
+                <button class="save-btn" id="sv6">Сохранить ответы</button>
+                <span class="saved-ok" id="saved6">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 7 — LaTeX -->
+        <div class="qblock" id="q7">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext-latex">
+                Найдите значение выражения при $\displaystyle a = -\frac{2}{7}$&thinsp;:
+                $$(5 - a)^2 - a(a - 3)$$
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a7"></div>
+            <div class="save-row">
+                <button class="save-btn" id="sv7">Сохранить ответ</button>
+                <span class="saved-ok" id="saved7">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 8 — LaTeX -->
+        <div class="qblock" id="q8">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext-latex">
+                Решите уравнение:
+                $$7x + (x + 4)^2 = 50 + (x - 3)(x + 8)$$
+            </div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a8"></div>
+            <div class="save-row">
+                <button class="save-btn" id="sv8">Сохранить ответ</button>
+                <span class="saved-ok" id="saved8">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 9 -->
+        <div class="qblock" id="q9">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext-block">
+                Спортивный костюм в январе стоил 3500&nbsp;руб. В феврале цену снизили на 10&nbsp;%.
+                В мае цену повысили на 25&nbsp;%. 
+            </div>
+            <div class="qtext-block">Сколько рублей стал стоить костюм?</div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a9">&nbsp;руб.</div>
+            <div class="save-row">
+                <button class="save-btn" id="sv9">Сохранить ответ</button>
+                <span class="saved-ok" id="saved9">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 10 -->
+        <div class="qblock" id="q10">
+            <div class="instr-box">Ответ запишите в виде целого числа или конечной десятичной дроби.</div>
+            <div class="qtext-block">
+                Контрольную работу писало 20&nbsp; учеников. За выполнение контрольной работы выставляется одна из отметок: «5», «4», «3» или «2». Отметку «4» получили 60&nbsp;% учеников, писавших контрольную, а тех, кто получил «2» или «3», было на 7 человек меньше, чем тех, кто получил «4». 
+            </div>
+            <div class="qtext-block">Сколько учеников получили отметку «5»?</div>
+            <div class="ans-box"><label>Ответ:</label><input type="text" id="a10">&nbsp;т</div>
+            <div class="save-row">
+                <button class="save-btn" id="sv10">Сохранить ответ</button>
+                <span class="saved-ok" id="saved10">✔ Сохранено</span>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" id="prevBtn" disabled>← Предыдущее</button>
+            <button class="nav-btn" id="nextBtn">Следующее →</button>
+        </div>
+    </div>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <div class="results-wrap" id="resultsWrap">
+        <h2 class="results-title">Результаты тестирования</h2>
+        <div class="results-info" id="resultsInfo"></div>
+        <div class="results-score" id="resultsScore"></div>
+        <table class="results-table" id="resultsTable">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Задание</th>
+                    <th>Ваш ответ</th>
+                    <th>Правильный ответ</th>
+                    <th>Балл</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+        </table>
+        <button class="btn-start" id="restartBtn" style="margin-top:25px">Пройти тест заново</button>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

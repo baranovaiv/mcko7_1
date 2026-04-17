@@ -1,0 +1,83 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:20px}
+.container{max-width:900px;margin:0 auto;background:#fff;border-radius:10px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+.logo-circle{width:80px;height:80px;background:#003366;border-radius:50%;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;font-weight:700}
+.header{text-align:center;margin-bottom:35px;padding-bottom:20px;border-bottom:3px solid #003366}
+.header h1{color:#003366;font-size:24px;margin-bottom:6px}
+.header p{color:#666;font-size:14px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+.reg-form{animation:fadeIn .4s}
+.reg-form.hidden{display:none}
+.form-title{text-align:center;color:#003366;font-size:20px;margin-bottom:25px}
+.fg{margin-bottom:20px}
+.fg label{display:block;font-weight:600;margin-bottom:6px;font-size:14px;color:#333}
+.fg .req{color:#e74c3c}
+.fg input,.fg select{width:100%;padding:11px 14px;border:2px solid #ddd;border-radius:6px;font-size:15px;font-family:inherit;transition:border-color .2s}
+.fg input:focus,.fg select:focus{outline:none;border-color:#003366}
+.err{color:#e74c3c;font-size:13px;margin-top:4px;display:none}
+.btn-start{width:100%;padding:14px;background:linear-gradient(135deg,#003366,#005599);color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 4px 15px rgba(0,51,102,.3);transition:transform .2s}
+.btn-start:hover{transform:translateY(-2px)}
+
+.test-wrap{display:none;animation:fadeIn .4s}
+.test-wrap.show{display:block}
+.info-bar{background:linear-gradient(135deg,#e8f4f8,#d4e9f2);padding:15px 20px;border-left:5px solid #003366;border-radius:6px;margin-bottom:20px;font-size:14px;color:#333;line-height:1.8}
+.progress-bar{height:8px;background:#e0e0e0;border-radius:10px;overflow:hidden;margin-bottom:20px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#003366,#005599);transition:width .4s}
+.meta-bar{display:flex;justify-content:space-between;padding:12px 18px;background:#f9f9f9;border:2px solid #e0e0e0;border-radius:6px;margin-bottom:25px;font-size:14px;color:#555}
+
+.qblock{display:none;animation:fadeIn .3s}
+.qblock.show{display:block}
+.instr-box{border:2px solid #333;padding:10px 15px;text-align:center;font-weight:700;font-size:15px;margin-bottom:22px}
+.instr-box2{border:2px solid #333;padding:10px 15px;text-align:center;font-weight:700;font-size:15px;margin-bottom:18px}
+.qtext{font-size:16px;color:#222;margin-bottom:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.qtext-block{font-size:15px;color:#222;margin-bottom:16px;line-height:1.7;text-align:justify}
+
+/* LaTeX-блок для заданий */
+.qtext-latex{font-size:17px;color:#222;margin-bottom:18px;line-height:1.9;padding:12px 16px;background:#fafafa;border:1px solid #e8e8e8;border-radius:6px}
+
+.fr{display:inline-flex;flex-direction:column;align-items:center;font-family:'Times New Roman',serif;font-size:16px;line-height:1.2;vertical-align:middle;margin:0 2px}
+.fr .n{border-bottom:1.5px solid #000;padding:0 4px 2px;text-align:center}
+.fr .d{padding:2px 4px 0;text-align:center}
+.or-div{text-align:center;font-weight:700;font-size:17px;margin:16px 0;color:#222}
+
+.ans-box{background:#e8f4f8;border:1px solid #b3cde0;border-radius:4px;padding:11px 16px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ans-box label{font-weight:600;color:#003366;font-size:15px;white-space:nowrap}
+.ans-box input{width:140px;padding:6px 10px;border:1px solid #999;border-radius:4px;font-size:15px;background:#fff}
+.ans-box input:focus{outline:none;border-color:#003366}
+
+.save-row{display:flex;align-items:center;gap:14px;margin-top:20px;padding-top:18px;border-top:1px solid #e0e0e0}
+.save-btn{padding:9px 24px;background:#fff;color:#333;border:1.5px solid #999;border-radius:4px;cursor:pointer;font-size:14px;font-family:inherit;transition:background .2s,border-color .2s}
+.save-btn:hover{background:#f5f5f5;border-color:#555}
+.saved-ok{font-size:13px;color:#1a7a1a;font-weight:600;display:none}
+
+.nl-hint-italic{font-size:14px;color:#333;margin-bottom:16px;line-height:1.6}
+.nl-wrapper{position:relative;width:100%;height:200px;margin:4px 0 8px;user-select:none;background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden;touch-action:none}
+#nlCanvas{display:block}
+
+.graph-wrapper{width:100%;margin:10px 0 16px;background:#fff;border:1px solid #ccc;border-radius:6px;overflow:hidden}
+#graphCanvas,#graphCanvas2{display:block;width:100%;cursor:default}
+#graphCanvas2{cursor:crosshair}
+
+.nav{display:flex;gap:15px;margin-top:35px;padding-top:22px;border-top:2px solid #e0e0e0}
+.nav-btn{flex:1;padding:12px;background:#003366;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .2s}
+.nav-btn:hover:not(:disabled){background:#005599;transform:translateY(-2px)}
+.nav-btn:disabled{background:#ccc;cursor:not-allowed;opacity:.6}
+
+/* РЕЗУЛЬТАТЫ */
+.results-wrap{display:none;animation:fadeIn .4s}
+.results-wrap.show{display:block}
+.results-title{text-align:center;color:#003366;font-size:22px;margin-bottom:20px}
+.results-info{text-align:center;font-size:15px;color:#555;margin-bottom:10px;line-height:1.7}
+.results-score{text-align:center;font-size:28px;font-weight:700;margin:16px 0 24px;padding:18px;border-radius:10px}
+.results-score.good{background:#d4edda;color:#155724;border:2px solid #28a745}
+.results-score.medium{background:#fff3cd;color:#856404;border:2px solid #ffc107}
+.results-score.bad{background:#f8d7da;color:#721c24;border:2px solid #dc3545}
+.results-table{width:100%;border-collapse:collapse;margin-bottom:10px}
+.results-table th{background:#003366;color:#fff;padding:10px 8px;font-size:14px;text-align:center}
+.results-table td{padding:10px 8px;text-align:center;font-size:14px;border-bottom:1px solid #e0e0e0}
+.results-table tr.correct{background:#d4edda}
+.results-table tr.wrong{background:#f8d7da}
+.results-table tr.partial{background:#fff3cd}
+
+@media(max-width:640px){.container{padding:20px}.meta-bar{flex-direction:column;gap:6px}.nav{flex-direction:column}.results-table{font-size:12px}}
